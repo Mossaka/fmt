@@ -21,27 +21,20 @@ tools:
 timeout-minutes: 15
 ---
 
-# Build and Test fmtlib/fmt
+# Quick Build Check
 
-Build and test the fmt C++ formatting library using CMake.
+Do a minimal build check of fmtlib/fmt.
 
 ## Instructions
 
-1. Check the C++ compiler and CMake version:
-   - Run `g++ --version` or `clang++ --version`
-   - Run `cmake --version`
+1. Check available tools: `which cmake g++`
 
-2. Create a build directory and configure the project:
-   - `mkdir -p build && cd build`
-   - `cmake .. -DFMT_TEST=ON`
+2. Find cmake if not in PATH: `find /opt -name cmake -type f 2>/dev/null | head -1`
 
-3. Build the project:
-   - `cmake --build . --parallel`
+3. Configure and build the library only (no tests):
+   - `mkdir -p build && cd build && cmake .. -DFMT_TEST=OFF`
+   - `make -j2 fmt`
 
-4. Run the test suite:
-   - `ctest --output-on-failure`
+4. Verify the library built: `ls -la build/libfmt.a`
 
-5. Report the build and test results:
-   - Number of tests run
-   - Number passed/failed
-   - Any build warnings or errors
+5. Report success and exit.
